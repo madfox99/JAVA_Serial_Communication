@@ -9,6 +9,7 @@ import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.io.OutputStream;
 import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.text.DefaultCaret;
 
 public class MainReceive extends javax.swing.JFrame {
 
@@ -178,6 +179,7 @@ public class MainReceive extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
+        jButton_send.setBackground(new java.awt.Color(0, 153, 0));
         jButton_send.setText("Send");
         jButton_send.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,10 +187,22 @@ public class MainReceive extends javax.swing.JFrame {
             }
         });
 
-        jTextArea_incomingData.setEditable(false);
         jTextArea_incomingData.setColumns(20);
         jTextArea_incomingData.setRows(5);
         jTextArea_incomingData.setAutoscrolls(true);
+        jTextArea_incomingData.setBorder(javax.swing.BorderFactory.createTitledBorder("Receive data"));
+        jTextArea_incomingData.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextArea_incomingDataCaretUpdate(evt);
+            }
+        });
+        jTextArea_incomingData.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jTextArea_incomingDataCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jTextArea_incomingData);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -295,6 +309,7 @@ public class MainReceive extends javax.swing.JFrame {
 
         jMenu3.setText("Rx Menu");
 
+        jMenuItem_clearData.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem_clearData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8_broom_20px.png"))); // NOI18N
         jMenuItem_clearData.setText("Clear Data");
         jMenuItem_clearData.addActionListener(new java.awt.event.ActionListener() {
@@ -308,6 +323,7 @@ public class MainReceive extends javax.swing.JFrame {
 
         jMenu1.setText("Settings");
 
+        alwaysOnTopCheckBox.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         alwaysOnTopCheckBox.setText("Always on top");
         alwaysOnTopCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -444,6 +460,7 @@ public class MainReceive extends javax.swing.JFrame {
     private void jMenuItem_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_clearDataActionPerformed
         dataBuffer = "";
         jTextArea_incomingData.setText(dataBuffer);
+        jTextField_dataToSend.setText("");
     }//GEN-LAST:event_jMenuItem_clearDataActionPerformed
 
     private void alwaysOnTopCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alwaysOnTopCheckBoxActionPerformed
@@ -454,6 +471,13 @@ public class MainReceive extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_alwaysOnTopCheckBoxActionPerformed
+
+    private void jTextArea_incomingDataCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextArea_incomingDataCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextArea_incomingDataCaretPositionChanged
+    private void jTextArea_incomingDataCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextArea_incomingDataCaretUpdate
+
+    }//GEN-LAST:event_jTextArea_incomingDataCaretUpdate
 
     private void Serial_EventBasedReading(SerialPort activePort) {
         activePort.addDataListener(new SerialPortDataListener() {
@@ -468,6 +492,7 @@ public class MainReceive extends javax.swing.JFrame {
                 for (int i = 0; i < newData.length; i++) {
                     dataBuffer += (char) newData[i];
                     jTextArea_incomingData.setText(dataBuffer);
+                    jTextArea_incomingData.setCaretPosition(jTextArea_incomingData.getDocument().getLength());
                 }
             }
         });
