@@ -88,7 +88,7 @@ public class MainReceive extends javax.swing.JFrame {
         jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JSerial Communication");
+        setTitle("JSerial Communication (v0.0.1)");
         setIconImages(null);
         setResizable(false);
 
@@ -128,6 +128,11 @@ public class MainReceive extends javax.swing.JFrame {
         jLabel7.setText("Parity bits");
 
         jComboBox_parityBits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO_PARITY", "EVEN_PARITY", "ODD_PARITY", "MARK_PARITY", "SPACE_PARITY" }));
+        jComboBox_parityBits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_parityBitsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -571,6 +576,10 @@ public class MainReceive extends javax.swing.JFrame {
     private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
         setTeatAreaFontChanges(26, "");
     }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
+
+    private void jComboBox_parityBitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_parityBitsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_parityBitsActionPerformed
 
     private void setTeatAreaFontChanges(int fontSize, String fontName) {
         if (fontSize == 0) {
