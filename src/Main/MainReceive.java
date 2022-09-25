@@ -4,18 +4,20 @@ package Main;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import java.awt.Font;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import java.io.OutputStream;
 import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.text.DefaultCaret;
 
 public class MainReceive extends javax.swing.JFrame {
 
-    SerialPort serialPort1;
-    OutputStream outputStream1;
-    String dataBuffer = "";
+    private SerialPort serialPort1;
+    private OutputStream outputStream1;
+    private String dataBuffer = "";
+    private int fontSize;
+    private String fontName;
 
     public MainReceive() {
         initComponents();
@@ -44,6 +46,7 @@ public class MainReceive extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox_comPort = new javax.swing.JComboBox<>();
@@ -76,6 +79,13 @@ public class MainReceive extends javax.swing.JFrame {
         jMenuItem_clearData = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         alwaysOnTopCheckBox = new javax.swing.JCheckBoxMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JSerial Communication");
@@ -188,9 +198,10 @@ public class MainReceive extends javax.swing.JFrame {
         });
 
         jTextArea_incomingData.setColumns(20);
+        jTextArea_incomingData.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextArea_incomingData.setRows(5);
         jTextArea_incomingData.setAutoscrolls(true);
-        jTextArea_incomingData.setBorder(javax.swing.BorderFactory.createTitledBorder("Receive data"));
+        jTextArea_incomingData.setBorder(javax.swing.BorderFactory.createTitledBorder("Received data"));
         jTextArea_incomingData.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jTextArea_incomingDataCaretUpdate(evt);
@@ -324,6 +335,7 @@ public class MainReceive extends javax.swing.JFrame {
         jMenu1.setText("Settings");
 
         alwaysOnTopCheckBox.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        alwaysOnTopCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         alwaysOnTopCheckBox.setText("Always on top");
         alwaysOnTopCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,6 +343,66 @@ public class MainReceive extends javax.swing.JFrame {
             }
         });
         jMenu1.add(alwaysOnTopCheckBox);
+        jMenu1.add(jSeparator1);
+
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8_cellular_network_20px.png"))); // NOI18N
+        jMenu5.setText("Received data");
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pic/icons8_text_width_20px.png"))); // NOI18N
+        jMenu6.setText("Font size");
+
+        buttonGroup2.add(jRadioButtonMenuItem1);
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("14");
+        jRadioButtonMenuItem1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem1.setIconTextGap(0);
+        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jRadioButtonMenuItem1);
+
+        buttonGroup2.add(jRadioButtonMenuItem2);
+        jRadioButtonMenuItem2.setText("18");
+        jRadioButtonMenuItem2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem2.setIconTextGap(0);
+        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jRadioButtonMenuItem2);
+
+        buttonGroup2.add(jRadioButtonMenuItem3);
+        jRadioButtonMenuItem3.setText("24");
+        jRadioButtonMenuItem3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem3.setIconTextGap(0);
+        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jRadioButtonMenuItem3);
+
+        buttonGroup2.add(jRadioButtonMenuItem4);
+        jRadioButtonMenuItem4.setText("26");
+        jRadioButtonMenuItem4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jRadioButtonMenuItem4.setIconTextGap(0);
+        jRadioButtonMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jRadioButtonMenuItem4);
+
+        jMenu5.add(jMenu6);
+
+        jMenu1.add(jMenu5);
 
         jMenuBar1.add(jMenu1);
 
@@ -415,9 +487,10 @@ public class MainReceive extends javax.swing.JFrame {
                 jButton_open.setEnabled(true);
                 jButton_close.setEnabled(false);
                 jButton_send.setEnabled(false);
-
                 try {
                     outputStream1.close();
+                    clearData();
+                    JOptionPane.showMessageDialog(this, "Port Close Successfully...!");
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(rootPane, e.getMessage());
                 }
@@ -457,10 +530,14 @@ public class MainReceive extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonMenuItem_newLineActionPerformed
 
-    private void jMenuItem_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_clearDataActionPerformed
+    private void clearData() {
         dataBuffer = "";
         jTextArea_incomingData.setText(dataBuffer);
         jTextField_dataToSend.setText("");
+    }
+
+    private void jMenuItem_clearDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_clearDataActionPerformed
+        clearData();
     }//GEN-LAST:event_jMenuItem_clearDataActionPerformed
 
     private void alwaysOnTopCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alwaysOnTopCheckBoxActionPerformed
@@ -479,6 +556,37 @@ public class MainReceive extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextArea_incomingDataCaretUpdate
 
+    private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
+        setTeatAreaFontChanges(14, "");
+    }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
+
+    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
+        setTeatAreaFontChanges(18, "");
+    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
+
+    private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
+        setTeatAreaFontChanges(24, "");
+    }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
+
+    private void jRadioButtonMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem4ActionPerformed
+        setTeatAreaFontChanges(26, "");
+    }//GEN-LAST:event_jRadioButtonMenuItem4ActionPerformed
+
+    private void setTeatAreaFontChanges(int fontSize, String fontName) {
+        if (fontSize == 0) {
+            this.fontSize = 14;
+        } else {
+            this.fontSize = fontSize;
+        }
+        if (fontName.equals("")) {
+            this.fontName = "Monospaced";
+        } else {
+            this.fontName = fontName;
+        }
+        jTextArea_incomingData.setFont(new Font(this.fontName, Font.PLAIN, this.fontSize));
+
+    }
+
     private void Serial_EventBasedReading(SerialPort activePort) {
         activePort.addDataListener(new SerialPortDataListener() {
             @Override
@@ -494,6 +602,7 @@ public class MainReceive extends javax.swing.JFrame {
                     jTextArea_incomingData.setText(dataBuffer);
                     jTextArea_incomingData.setCaretPosition(jTextArea_incomingData.getDocument().getLength());
                 }
+                newData = null;
             }
         });
     }
@@ -537,6 +646,7 @@ public class MainReceive extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem alwaysOnTopCheckBox;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton_close;
     private javax.swing.JButton jButton_open;
     private javax.swing.JButton jButton_send;
@@ -555,17 +665,24 @@ public class MainReceive extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_clearData;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar_comStatus;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem_both;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem_carriageReturn;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem_newLine;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem_none;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextArea jTextArea_incomingData;
     private javax.swing.JTextField jTextField_dataToSend;
     // End of variables declaration//GEN-END:variables
