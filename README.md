@@ -9,4 +9,5 @@ This is a simple Java based serial communication programme.
 
 Language : Java</br>
 Used IDE : NetBeans IDE 8.2</br>
+<h4>You can find jSerialComm-2.9.2.jar file inside jSerialComm-2.9.2 folder</h4></br>
 (Tested on Windows)
